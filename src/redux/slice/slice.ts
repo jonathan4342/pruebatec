@@ -1,26 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState={
-TrivQuestions:[]
+const initialState = {
+    trivQuestions: [],
+    page: 1
 }
-export const triviaSlice= createSlice({
-    name:'root',
+export const triviaSlice = createSlice({
+    name: 'root',
     initialState,
-    reducers:{
-        setTrivQuestions:(initialState,{payload})=>{
-            initialState.TrivQuestions=payload;
+    reducers: {
+        setTrivQuestions: (initialState, { payload }) => {
+            initialState.trivQuestions = payload;
+        },
+
+        nextPage: (initialState) => {
+            initialState.page++;
         }
     }
 })
-const {setTrivQuestions}=triviaSlice.actions;
+export const { setTrivQuestions, nextPage } = triviaSlice.actions;
 
-export const getQuestions=createAsyncThunk(
+export const getQuestions = createAsyncThunk(
     'questions',
-    async(id,thunkAPI)=>{
-        const {dispatch}=thunkAPI;
-        const {data}=await axios.get(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`)
-        dispatch(setTrivQuestions(data.results))
+    async (_, { dispatch }) => {
+        const { data: { results } } = await axios.get(`https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`)
+        dispatch(setTrivQuestions(results))
     }
 )
 
