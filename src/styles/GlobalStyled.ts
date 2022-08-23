@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
+
 export const GlobalStyles = createGlobalStyle`
     html {
         box-sizing: border-box;
@@ -9,9 +10,8 @@ export const GlobalStyles = createGlobalStyle`
     }
     body{
         margin: 0;
-        background-color: white;
-        font-family:'Montserrat';
-        color:#291507;
+        background-color: #8FE3CF;
+        font-family:'Source Sans Pro', sans-serif;
     }
     * {
         margin: 0;
