@@ -1,39 +1,44 @@
 import { useEffect } from "react";
-import { getQuestions, nextPage } from "../redux/slice/slice";
+import { nextPage } from "../redux/slice/slice";
 import { useAppDispatch, RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { SingleQuestion } from "../components/SingleQuestion";
-
+import { EndOfTheGame } from "../components/EndOfTheGame";
+import { getQuestions } from "../redux/actions/Actions";
+import * as SC from '../styles/GobalStyledComponents';
 export const Questions = () => {
 
     const dispatch = useAppDispatch();
-    const trivQuestions = useSelector((state: RootState) => state.triviaSlice.trivQuestions);
+    const { trivQuestions, page } = useSelector((state: RootState) => state.triviaSlice);
 
-    const onNextPage = () => {
-        dispatch(nextPage())
-    }
+  
 
     useEffect(() => {
         dispatch(getQuestions())
     }, [dispatch])
 
     return (
-        <div style={{width:"100%"}}>
-            <h1>questions</h1>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "centers",width:"100%" }}>
-                {
-                    trivQuestions.map((e: any,index) =>
-                        <SingleQuestion
-                            key={index}
-                            question={e}
-                            position={index}
-                        />  
-                    )
-                }
-            </div>
-            <button onClick={onNextPage}>
-                Siguiente
-            </button>
+        // tengo que setear el estado trivQuestion en null una vez le de al boton PLAY AGAIN y realizar
+        // la peticion cada vez que entre al componete de question 
+        <div style={{ width: "100%" }}>
+            {
+                page > 9 ? <EndOfTheGame /> :
+                    <>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "centers", width: "100%" }}>
+                            {
+                                trivQuestions?.map((e: any, index) =>
+                                    <SingleQuestion
+                                        key={index}
+                                        question={e}
+                                        position={index}
+                                    />
+                                )
+                            }
+                        </div>
+
+                    </>
+
+            }
         </div>
     )
 }

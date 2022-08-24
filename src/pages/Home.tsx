@@ -1,11 +1,11 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as SC from '../styles/GobalStyledComponents';
 
 export const Home = () => {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
-    const questions=()=>{
+    const questions = () => {
         navigate('/questions')
     };
     return (
@@ -13,12 +13,12 @@ export const Home = () => {
             <div className="title ">
                 Welcome to the Trivia challenge!
             </div>
-            <span >
+            <SC.Span >
                 You will be presented with 10 True or False questions.
-            </span>
-            <span>
+            </SC.Span>
+            <SC.Span>
                 Can you score 100%?
-            </span>
+            </SC.Span>
             <div>
                 <SC.Button onClick={questions}>
                     BEGIN
