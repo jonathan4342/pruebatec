@@ -1,13 +1,19 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setNull } from '../redux/slice/slice';
+import { useAppDispatch } from '../redux/store';
 import * as SC from '../styles/GobalStyledComponents';
 
 export const Home = () => {
 
     const navigate = useNavigate();
-
+    const dispatch= useAppDispatch();
     const questions = () => {
         navigate('/questions')
     };
+    useEffect(()=>{ 
+        dispatch(setNull())
+    },[dispatch])
     return (
         <SC.ContBox>
             <div className="title ">

@@ -1,17 +1,16 @@
 import { useEffect } from "react";
-import { nextPage } from "../redux/slice/slice";
 import { useAppDispatch, RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
 import { SingleQuestion } from "../components/SingleQuestion";
 import { EndOfTheGame } from "../components/EndOfTheGame";
 import { getQuestions } from "../redux/actions/Actions";
-import * as SC from '../styles/GobalStyledComponents';
+
 export const Questions = () => {
 
     const dispatch = useAppDispatch();
     const { trivQuestions, page } = useSelector((state: RootState) => state.triviaSlice);
 
-  
+
 
     useEffect(() => {
         dispatch(getQuestions())
