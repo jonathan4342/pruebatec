@@ -3,7 +3,7 @@ import { Props } from "../../interfaces/Interfaces";
 
 const initialState: Props = {
     trivQuestions: [],
-    page: 1,
+    page: 0,
     resultQuestions:[]
 }
 export const triviaSlice = createSlice({
@@ -19,7 +19,8 @@ export const triviaSlice = createSlice({
         },
         setNull: (initialState) => {
             initialState.trivQuestions = [];
-            initialState.page = 1
+            initialState.page = 0;
+            initialState.resultQuestions=[]
         },
         setResultQuestions: (initialState, { payload}) => {
             initialState.resultQuestions=[...initialState.resultQuestions,payload];

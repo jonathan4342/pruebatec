@@ -16,12 +16,12 @@ export const SingleQuestion = ({ position, question }: Props) => {
     if ((page !== position)) {
         return null
     }
+    
     const onNextPage = (value: string) => {
         dispatch(nextPage())
         dispatch(setResultQuestions({question,value}))
     }
 
-    // tengo que agarrar la posicion de la pregunta en el arreglo y si se respondio true o False para luego hacer un find, buscar la pregunta correspondiente y mostrar si esta bien o mal
     return (
         <SC.QuestionCont>
             <div>{question.category}</div>
@@ -29,7 +29,7 @@ export const SingleQuestion = ({ position, question }: Props) => {
                 {question.question}
             </SC.Span>
             <SC.Span>
-                {position} of 10
+                {position +1} of 10
             </SC.Span>
             <SC.DivButton>
                 <SC.Button onClick={() => onNextPage('True')} backgroundColor='green' border='1px solid green' value='true'>
